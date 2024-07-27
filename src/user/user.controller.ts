@@ -7,7 +7,6 @@ import {
   Param,
   Body,
 } from '@nestjs/common';
-import { userInfo } from 'os';
 @Controller()
 export class UserController {
   // 1# any rout is a method , every method coming after http method decorator👇
