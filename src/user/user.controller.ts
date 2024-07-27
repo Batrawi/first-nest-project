@@ -1,4 +1,12 @@
-import { Controller, Delete, Get, Patch, Post, Param } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  Param,
+  Body,
+} from '@nestjs/common';
 @Controller()
 export class UserController {
   // 1# any rout is a method , every method coming after http method decorator👇
@@ -16,8 +24,8 @@ export class UserController {
     return userId;
   }
   @Post('user')
-  createUser(): string {
-    return 'user created successfully';
+  createUser(@Body() data: any): any {
+    return `user created successfully:\n ${JSON.stringify(data)}`;
   }
 
   @Patch('user')
