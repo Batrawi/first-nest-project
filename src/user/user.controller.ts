@@ -36,8 +36,8 @@ export class UserController {
     return `${userName} info updated \n ${JSON.stringify(inputUserData)}`;
   }
 
-  @Delete('user')
-  removeUser(): string {
-    return 'usr deleted';
+  @Delete(':userid')
+  removeUser(@Param('userid') userId: number): string {
+    return `The user who has this id deleted ${userId}`;
   }
 }
