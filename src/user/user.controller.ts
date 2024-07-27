@@ -8,7 +8,10 @@ export class UserController {
     return ['Mohammed', 'Anas', 'Mahmoud', 'Ahmed'];
   }
 
-  @Get('user:userId')
+  // here👇 we tell nest this rout is dynamic , that means theres params here.
+
+  @Get(':userId')
+  // to get access to the specific param from request params, we defined and destructuring the param that we want,
   findOneUser(@Param('userId') userId: number): number {
     return userId;
   }
