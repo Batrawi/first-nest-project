@@ -16,8 +16,8 @@ export class UsersController {
   // we can delete 'user' inside get and post decorator and just pass it inside the controller.
   // the resources in the nest apps should be like users, cats, products,...etc , not cat, user,product...etc.
   @Get()
-  get(): string[] {
-    return ['Mohammed', 'Anas', 'Mahmoud', 'Ahmed'];
+  get(): UsersEntity[] {
+    return users;
   }
 
   // here👇 we tell nest this rout is dynamic , that means theres params here.
