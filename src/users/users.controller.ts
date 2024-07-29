@@ -14,7 +14,7 @@ export class UsersController {
   // we can delete 'user' inside get and post decorator and just pass it inside the controller.
   // the resources in the nest apps should be like users, cats, products,...etc , not cat, user,product...etc.
   @Get()
-  getAllUsers(): string[] {
+  get(): string[] {
     return ['Mohammed', 'Anas', 'Mahmoud', 'Ahmed'];
   }
 
@@ -22,16 +22,16 @@ export class UsersController {
 
   @Get(':userId')
   // to get access to the specific param from request params, we defined and destructuring the param that we want,
-  findOneUser(@Param('userId') userId: number): number {
+  getOne(@Param('userId') userId: number): number {
     return userId;
   }
   @Post()
-  createUser(@Body() data: any): any {
+  create(@Body() data: any): any {
     return `user created successfully:\n ${JSON.stringify(data)}`;
   }
 
   @Patch(':userName')
-  updateUser(
+  update(
     @Param('userName') userName: string,
     @Body() inputUserData: any,
   ): string {
@@ -39,7 +39,7 @@ export class UsersController {
   }
 
   @Delete(':userid')
-  removeUser(@Param('userid') userId: number): string {
+  remove(@Param('userid') userId: number): string {
     return `The user who has this id deleted ${userId}`;
   }
 }
