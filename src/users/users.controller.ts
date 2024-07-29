@@ -7,17 +7,18 @@ import {
   Param,
   Body,
 } from '@nestjs/common';
+import { CreateDTO } from './DTOs/create.dto';
 import { UsersEntity } from './users.entity';
-const users: UsersEntity[] = [];
 @Controller('users')
 export class UsersController {
+  private users: UsersEntity[] = [];
   // 1# any rout is a method , every method coming after http method decorator👇
   // 2# we can make our api dynamic by suing request params
   // we can delete 'user' inside get and post decorator and just pass it inside the controller.
   // the resources in the nest apps should be like users, cats, products,...etc , not cat, user,product...etc.
   @Get()
   get(): UsersEntity[] {
-    return users;
+    return this.users;
   }
 
   // here👇 we tell nest this rout is dynamic , that means theres params here.
@@ -28,8 +29,21 @@ export class UsersController {
     return userId;
   }
   @Post()
-  create(@Body() data: any): any {
-    return `user created successfully:\n ${JSON.stringify(data)}`;
+  create(@Body() data: CreateDTO): CreateDTO {
+    /*     const newUser = new UsersEntity();
+    newUser.id = 'uuid1';
+    newUser.name = data.name;
+    newUser.email = data.email;
+    newUser.age = data.age;
+    newUser.gender = data.gender; */
+
+    const newUser: UsersEntity = {
+      id: 'uuid1',
+      ...data,
+    };
+    this.users.push(newUser);
+    console.log(this.users);
+    return newUser;
   }
 
   @Patch(':userName')
