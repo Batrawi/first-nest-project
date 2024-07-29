@@ -1,6 +1,6 @@
 export class UsersEntity {
   id: string;
-  userName: string;
+  name: string;
   email: string;
   age: number;
   gender: string;
