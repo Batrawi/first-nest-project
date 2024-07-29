@@ -3,5 +3,5 @@ export class UsersEntity {
   userName: string;
   email: string;
   age: number;
-  gender?: string;
+  gender: string;
 }
