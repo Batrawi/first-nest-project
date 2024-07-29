@@ -7,11 +7,13 @@ import {
   Param,
   Body,
 } from '@nestjs/common';
-@Controller()
-export class UserController {
+@Controller('users')
+export class UsersController {
   // 1# any rout is a method , every method coming after http method decorator👇
   // 2# we can make our api dynamic by suing request params
-  @Get('user')
+  // we can delete 'user' inside get and post decorator and just pass it inside the controller.
+  // the resources in the nest apps should be like users, cats, products,...etc , not cat, user,product...etc.
+  @Get()
   getAllUsers(): string[] {
     return ['Mohammed', 'Anas', 'Mahmoud', 'Ahmed'];
   }
@@ -23,7 +25,7 @@ export class UserController {
   findOneUser(@Param('userId') userId: number): number {
     return userId;
   }
-  @Post('user')
+  @Post()
   createUser(@Body() data: any): any {
     return `user created successfully:\n ${JSON.stringify(data)}`;
   }
