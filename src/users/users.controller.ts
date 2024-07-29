@@ -7,6 +7,8 @@ import {
   Param,
   Body,
 } from '@nestjs/common';
+import { UserEntity } from './user.entity';
+const users: UserEntity[] = [];
 @Controller('users')
 export class UsersController {
   // 1# any rout is a method , every method coming after http method decorator👇
