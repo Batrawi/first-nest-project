@@ -7,7 +7,9 @@ import {
   Param,
   Body,
 } from '@nestjs/common';
+import { v4 as uuidv4 } from 'uuid';
 import { CreateDTO } from './DTOs/create.dto';
+import { UpdateDTO } from './DTOs/update.dto';
 import { UsersEntity } from './users.entity';
 @Controller('users')
 export class UsersController {
@@ -38,20 +40,19 @@ export class UsersController {
     newUser.gender = data.gender; */
 
     const newUser: UsersEntity = {
-      id: 'uuid1',
+      id: uuidv4(),
       ...data,
     };
     this.users.push(newUser);
-    console.log(this.users);
     return newUser;
   }
 
-  @Patch(':userName')
-  update(
-    @Param('userName') userName: string,
-    @Body() inputUserData: any,
-  ): string {
-    return `${userName} info updated \n ${JSON.stringify(inputUserData)}`;
+  @Patch(':id')
+  update(@Param('id') userId: string, @Body() inputData: UpdateDTO): UpdateDTO {
+    // find the user`s index that I want to update
+    const userIndex = this.users.findIndex((user) => user.id === userId);
+    this.users[userIndex] = { ...this.users[userIndex], ...inputData };
+    return this.users[userIndex];
   }
 
   @Delete(':userid')
