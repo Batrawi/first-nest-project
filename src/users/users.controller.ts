@@ -6,6 +6,8 @@ import {
   Post,
   Param,
   Body,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateDTO } from './DTOs/create.dto';
@@ -55,8 +57,9 @@ export class UsersController {
     return this.users[userIndex];
   }
 
-  @Delete(':userid')
-  remove(@Param('userid') userId: number): string {
-    return `The user who has this id deleted ${userId}`;
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  remove(@Param('id') userId: string) {
+    this.users = this.users.filter((user) => user.id !== userId);
   }
 }
